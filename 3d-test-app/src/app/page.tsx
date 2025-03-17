@@ -1,5 +1,5 @@
-import Canvas3D from "@/components/Canvas3D";
+import MainComponent from '@/components/main/MainComponent';
 
 export default function Home() {
-  return <Canvas3D />;
+  return <MainComponent />;
 }
