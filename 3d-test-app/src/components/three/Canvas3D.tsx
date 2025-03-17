@@ -19,6 +19,7 @@ const Canvas3D = () => {
         {/* <CameraLogger /> */}
         <OrbitControls
           target={[0, 66, 0]} // 타겟 위치 설정
+          panSpeed={0.1}
         />
         <PerspectiveCamera 
           makeDefault
