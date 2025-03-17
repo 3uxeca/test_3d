@@ -18,7 +18,7 @@ const MainComponent = () => {
   return (
     <div className='w-full h-full p-8'>
       <PageTitle pageName='공항 혼잡도 분석' />
-      <div className='w-full h-full mt-8 flex justify-start items-start gap-6'>
+      <div className='w-full mt-8 flex justify-start items-start gap-6'>
         <div className='grid grid-rows-3 gap-5'>
           {
             statusData?.map((item, index) => {
@@ -28,7 +28,7 @@ const MainComponent = () => {
             })
           }
         </div>
-        <div className='w-[100%] h-[80vh] bg-black'>
+        <div className='w-[100%] h-[70vh] bg-black'>
           <Canvas3D />
         </div>
       </div>
