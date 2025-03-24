@@ -25,13 +25,19 @@ const Info3D = (props:InfoButtonProps) => {
 
   useEffect(() => {
     const color = '#ff0000'
-    // clonedScene.traverse((object) => {
-    //   if (object.isMesh) {
-    //     object.material = object.material.clone(); // 개별 인스턴스를 위한 material 복제
-    //     object.material.color.set(color); // 새로운 색상 적용
-    //   }
-    // });
-  }, []); // color 변경 시 다시 적용  
+    console.log('clonedScene :: ', clonedScene);
+    clonedScene.traverse((chlid) => {
+      // if (object.isMesh) {
+      //   object.material = object.material.clone(); // 개별 인스턴스를 위한 material 복제
+      //   object.material.color.set(color); // 새로운 색상 적용
+      // }
+      if (chlid instanceof THREE.Mesh) {
+        console.log('child material :: ', chlid);
+        // chlid.material = chlid.material.clone(); // 개별 인스턴스를 위한 material 복제
+        // chlid.material.color.set(color); // 새로운 색상 적용
+      }      
+    });
+  }, [clonedScene]); // color 변경 시 다시 적용  
 
   return (
     <>

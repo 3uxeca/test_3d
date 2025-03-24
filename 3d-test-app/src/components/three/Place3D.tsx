@@ -1,5 +1,5 @@
 import { useMainStore } from "@/store/useMainStore";
-import { Box } from "@react-three/drei";
+import { Box, useGLTF } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
@@ -7,7 +7,7 @@ const Place3D = () => {
   const finishRef = useRef<THREE.Mesh>(null);
   const { isFinished, isReset } = useMainStore();
   const WAIT_OPACITY = 0.2;
-  
+
   useEffect(() => {
     if(isReset) console.log('Place3D isReset :: ', isReset);
     console.log('Place3D isFinished :: ', isFinished);

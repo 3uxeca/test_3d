@@ -1,0 +1,11 @@
+Model Information:
+* title:	Velvet Rope
+* source:	https://sketchfab.com/3d-models/velvet-rope-973169fc96f24a23ad56ec91a2dae4bf
+* author:	dayoung.ko (https://sketchfab.com/dayoung.ko)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Velvet Rope" (https://sketchfab.com/3d-models/velvet-rope-973169fc96f24a23ad56ec91a2dae4bf) by dayoung.ko (https://sketchfab.com/dayoung.ko) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

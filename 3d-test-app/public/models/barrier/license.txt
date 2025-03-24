@@ -1,0 +1,8 @@
+Model Information:
+* title:	Airport Barrier
+* source:	https://sketchfab.com/3d-models/airport-barrier-c7d8b4303b854ffbae4d1d6c06d4f6d0
+* author:	assetfactory (https://sketchfab.com/assetfactory)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works

@@ -9,6 +9,7 @@ import * as THREE from "three";
 const Model3D = () => {
   const { scene, animations } = useGLTF("/models/Man.glb");
   const humanRef = useRef<THREE.Group>(null);
+  const clonedScene = scene.clone();
   const { actions } = useAnimations(animations, humanRef);
   const { isButtonPressed, setButtonPressed, isFinished, setFinished, isReset } =
     useMainStore();
@@ -170,11 +171,15 @@ const Model3D = () => {
     }
   }, [isButtonPressed, isFinished, isReset]);
 
+  useEffect(() => {
+    console.log('clonedScene :: ', clonedScene);
+  }, [clonedScene]);
 
   return (
     <>
       {/* 사람 모델 */}
-      <primitive ref={humanRef} object={scene} scale={5} position={[0, 0, -10]} />
+      {/* <primitive ref={humanRef} object={scene} scale={5} position={[0, 0, -10]} /> */}
+      {/* <primitive ref={humanRef} object={clonedScene} scale={100} position={[10, 0, 10]} /> */}
       {/* 사람의 발 아래 위치하는 작은 바닥 */}
       <mesh
         position={floorPosition}
