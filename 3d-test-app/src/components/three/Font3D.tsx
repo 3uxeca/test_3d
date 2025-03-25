@@ -1,7 +1,17 @@
 import * as THREE from 'three';
-import { Billboard, Center, Float, Helper, ScreenSpace, Text3D, useMatcapTexture } from '@react-three/drei';
-import { useFrame, useThree } from '@react-three/fiber';
-import { useRef } from 'react';
+import {
+  Billboard,
+  Center,
+  CycleRaycast,
+  Float,
+  Helper,
+  ScreenSpace,
+  Text3D,
+  useCursor,
+  useMatcapTexture,
+} from '@react-three/drei';
+import { ThreeEvent, useFrame, useThree } from '@react-three/fiber';
+import { useRef, useState } from 'react';
 
 interface Font3DProps {
   status: string;
@@ -27,12 +37,21 @@ const Font3D = (props: Font3DProps) => {
   const { width: w, height: h } = useThree((state) => state.viewport);
   const ref = useRef<THREE.Group>(null);
 
+  const [hovered, set] = useState<boolean>(false);
+  useCursor(hovered /*'pointer', 'auto', document.body*/);
+
+  // Facetype.js에서 원하는 폰트를 json으로 변환함
   const fontUrl = '/fonts/ONE Mobile Title_Regular.json';
   const fontStyle = {
     font: fontUrl,
     size: 1.5,
     height: 0.5,
     letterSpacing: 0.025,
+    bevelSegments: 1,
+    bevelEnabled: true,
+    bevelSize: 0.08,
+    bevelThickness: 0.2,
+    // curveSegments: 24
   };
 
   useFrame((_, delta) => {
@@ -41,27 +60,32 @@ const Font3D = (props: Font3DProps) => {
     }
   });
 
+  const onClick = (e: ThreeEvent<MouseEvent>) => {
+    if (e && e.eventObject) {
+      console.log('onClick', e.eventObject);
+    }
+  };
+
   return (
     <>
       <Helper type={THREE.BoxHelper} args={['royalblue']} />
-      <Center ref={ref} top scale={[0.9, 1, 1]} position={position}>
+      <Center
+        ref={ref}
+        top
+        scale={[0.9, 1, 1]}
+        position={position}
+        onPointerOver={() => set(true)}
+        onPointerOut={() => set(false)}
+      >
         <Helper type={THREE.BoxHelper} args={['royalblue']} />
         <Float
+          onClick={onClick}
           speed={5} // Animation speed, defaults to 1
           rotationIntensity={0} // XYZ rotation intensity, defaults to 1
           floatIntensity={1} // Up/down float intensity, works like a multiplier with floatingRange,defaults to 1
           floatingRange={[0, 1]} // Range of y-axis values the object will float within, defaults to [-0.1,0.1]
         >
-          <Text3D
-            position={[position[0], position[1], position[2]]}
-            rotation={[0, 1, 0]}
-            // curveSegments={24}
-            bevelSegments={1}
-            bevelEnabled
-            bevelSize={0.08}
-            bevelThickness={0.2}
-            {...fontStyle}
-          >
+          <Text3D position={[position[0], position[1], position[2]]} rotation={[0, 1, 0]} {...fontStyle}>
             {status}
             <meshMatcapMaterial color='white' matcap={matcapTexture} />
           </Text3D>
@@ -69,11 +93,6 @@ const Font3D = (props: Font3DProps) => {
             // rotation={[0, Math.PI/2, 0]}
             rotation={[0, 1, 0]}
             position={[position[0], position[1] - 2.5, position[2]]}
-            // curveSegments={24}
-            bevelSegments={1}
-            bevelEnabled
-            bevelSize={0.08}
-            bevelThickness={0.2}
             {...fontStyle}
           >
             {`${delay}분`}

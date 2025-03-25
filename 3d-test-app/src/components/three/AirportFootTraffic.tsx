@@ -1,5 +1,5 @@
-'use client'
-import { Loader, OrbitControls, PerspectiveCamera, useGLTF } from '@react-three/drei';
+'use client';
+import { Loader, OrbitControls, PerspectiveCamera, Preload, useGLTF } from '@react-three/drei';
 import { Canvas, useThree } from '@react-three/fiber';
 import { Suspense, useRef } from 'react';
 import { Euler } from 'three';
@@ -9,15 +9,15 @@ import Barrier from './Barrier';
 import Airport3D from './Airport3D';
 
 const AirportFootTraffic = () => {
-
   const cameraRef = useRef<any>();
 
   return (
     <>
-    <Canvas camera={{ position: [0, 0, 0], fov: 45 }}>
-        <Suspense fallback={"LOADING"}>
+      <Canvas camera={{ position: [0, 0, 0], fov: 45 }}>
+        <Suspense fallback={'LOADING'}>
           <Lights />
           <Airport3D />
+          <Preload all />
         </Suspense>
         {/* <CameraLogger /> */}
         <OrbitControls
@@ -33,13 +33,13 @@ const AirportFootTraffic = () => {
           zoom={6} // 기본 줌 레벨
           near={1}
           far={10000}
-          rotation={new Euler(-Math.PI / 2, -2, 0)}        
+          rotation={new Euler(-Math.PI / 2, -2, 0)}
           ref={cameraRef}
         />
       </Canvas>
-      <Loader />    
+      <Loader />
     </>
-  )  
-}
+  );
+};
 
 export default AirportFootTraffic;
