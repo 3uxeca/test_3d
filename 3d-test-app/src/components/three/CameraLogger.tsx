@@ -7,12 +7,11 @@ const CameraLogger = () => {
   return (
     <OrbitControls
       onChange={() => {
-        console.log("Camera Position:", camera.position);
-        console.log("Camera Rotation:", camera.rotation);
+        console.log('Camera Position:', camera.position);
+        console.log('Camera Rotation:', camera.rotation);
       }}
     />
   );
 };
-
 
 export default CameraLogger;

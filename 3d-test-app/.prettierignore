@@ -1,0 +1,12 @@
+# Ignore version control & dependencies
+**/.git
+**/.svn
+**/.hg
+**/node_modules
+
+# Ignore 3D assets and config-like files
+**/*.gltf
+**/*.glb
+**/*.obj
+**/*.json
+**/*.mjs

@@ -1,21 +1,22 @@
-'use client'
+'use client';
 
-import { Bounds } from "@react-three/drei";
-import Button3D from "./Button3D";
-import Lights from "./Lights";
-import Model3D from "./Model3D";
-import Place3D from "./Place3D";
-import { useFrame, useThree } from '@react-three/fiber';
+import { Bounds } from '@react-three/drei';
+import { useThree } from '@react-three/fiber';
 import { useEffect } from 'react';
-import Info3D from './Info3D';
 import * as THREE from 'three';
+
+import Button3D from './Button3D';
+import Info3D from './Info3D';
+import Lights from './Lights';
+import Model3D from './Model3D';
+import Place3D from './Place3D';
 
 const Scene = () => {
   const { camera } = useThree();
 
   useEffect(() => {
     console.log('CAMERA :: ', camera);
-  }, [camera]);  
+  }, [camera]);
   return (
     <>
       <Lights />

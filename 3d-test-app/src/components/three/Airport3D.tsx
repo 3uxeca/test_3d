@@ -1,10 +1,12 @@
-import { Shadow, useGLTF } from '@react-three/drei';
+import { useGLTF } from '@react-three/drei';
 import { useThree } from '@react-three/fiber';
 import { useEffect } from 'react';
-import Font3D from './Font3D';
-import Barrier from './Barrier';
 import * as THREE from 'three';
+
 import { barrierData } from '@/entities/airportAssets/barrierData';
+
+import Barrier from './Barrier';
+import Font3D from './Font3D';
 
 const Airport3D = () => {
   const { raycaster } = useThree();
@@ -17,7 +19,9 @@ const Airport3D = () => {
     }
   }, [raycaster]);
 
-  const renderBarriers = (data: { pos: number[]; rotY: number; color: string }[]) =>
+  const renderBarriers = (
+    data: { pos: number[]; rotY: number; color: string }[],
+  ) =>
     data.map(({ pos, rotY, color }, idx) => (
       <Barrier
         key={`${color}-${idx}`}
@@ -31,13 +35,17 @@ const Airport3D = () => {
     <>
       <primitive object={airportClonedScene} scale={20} position={[0, 0, 0]} />
 
-      <Font3D status={`원활`} delay={5} color='green1' position={[20, 0, 0]} />
-      <Font3D status={`보통`} delay={10} color='yellow' position={[10, 0, 0]} />
-      <Font3D status={`혼잡`} delay={15} color='red2' position={[0, 0, 0]} />
+      <Font3D status={`원활`} delay={5} color="green1" position={[20, 0, 0]} />
+      <Font3D status={`보통`} delay={10} color="yellow" position={[10, 0, 0]} />
+      <Font3D status={`혼잡`} delay={15} color="red2" position={[0, 0, 0]} />
 
-      <group name='입구 대기열 구분선'>{renderBarriers(barrierData.entranceQueue)}</group>
+      <group name="입구 대기열 구분선">
+        {renderBarriers(barrierData.entranceQueue)}
+      </group>
 
-      <group name='신분 검색대 대기열 구분선'>{renderBarriers(barrierData.idCheckQueue)}</group>
+      <group name="신분 검색대 대기열 구분선">
+        {renderBarriers(barrierData.idCheckQueue)}
+      </group>
     </>
   );
 };

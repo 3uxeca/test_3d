@@ -1,25 +1,33 @@
-"use client";
+'use client';
 
-import { useMainStore } from "@/store/useMainStore";
-import { useAnimations, useGLTF } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import React, { useEffect, useRef, useState } from "react";
-import * as THREE from "three";
+import { useAnimations, useGLTF } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
+import React, { useEffect, useRef, useState } from 'react';
+import * as THREE from 'three';
+
+import { useMainStore } from '@/store/useMainStore';
 
 const Model3D = () => {
-  const { scene, animations } = useGLTF("/models/Man.glb");
+  const { scene, animations } = useGLTF('/models/Man.glb');
   const humanRef = useRef<THREE.Group>(null);
   const clonedScene = scene.clone();
   const { actions } = useAnimations(animations, humanRef);
-  const { isButtonPressed, setButtonPressed, isFinished, setFinished, isReset } =
-    useMainStore();
+  const {
+    isButtonPressed,
+    setButtonPressed,
+    isFinished,
+    setFinished,
+    isReset,
+  } = useMainStore();
   const [currentAnimation, setCurrentAnimation] = useState(
-    "HumanArmature|Man_Idle"
+    'HumanArmature|Man_Idle',
   );
-  const [floorPosition, setFloorPosition] = useState(new THREE.Vector3(0, 2, 0)); // 초기 바닥 위치
-  const [floorColor, setFloorColor] = useState("#ffffff");  // 기본 바닥 색상
+  const [floorPosition, setFloorPosition] = useState(
+    new THREE.Vector3(0, 2, 0),
+  ); // 초기 바닥 위치
+  const [floorColor, setFloorColor] = useState('#ffffff'); // 기본 바닥 색상
   const [targetX, setTargetX] = useState(0); // 목표 X 위치
-  const [isMovingX, setIsMovingX] = useState(false); // X 이동 중 여부  
+  const [isMovingX, setIsMovingX] = useState(false); // X 이동 중 여부
   const centerX = 5;
   const leftX = 50;
   const rightX = -50;
@@ -30,22 +38,35 @@ const Model3D = () => {
 
   useFrame((state, delta) => {
     if (humanRef.current) {
-      // console.log("모델상태", humanRef.current.position);     
+      // console.log("모델상태", humanRef.current.position);
 
       // 바닥을 사람의 위치를 따라가게 설정
-      setFloorPosition(new THREE.Vector3(humanRef.current.position.x,
-        -0.98, // 바닥 위치 고정
-        humanRef.current.position.z));       
+      setFloorPosition(
+        new THREE.Vector3(
+          humanRef.current.position.x,
+          -0.98, // 바닥 위치 고정
+          humanRef.current.position.z,
+        ),
+      );
 
       // 사람의 위치에 따라 바닥 색상 변경
       if (humanRef.current.position.z <= 100) {
-        setFloorColor("#00ff00"); // 초록색
-      } else if (humanRef.current.position.z > 120 && humanRef.current.position.z <= 200) {
-        setFloorColor("#ff7b00"); // 주황색
-      } else if (humanRef.current.position.z > 200 && humanRef.current.position.z <= 345) {
-        setFloorColor("#ff0000"); // 빨간색
-      } else if (humanRef.current.position.z >= 345 || humanRef.current.position.z <= 50) {
-        setFloorColor('#ffffff')
+        setFloorColor('#00ff00'); // 초록색
+      } else if (
+        humanRef.current.position.z > 120 &&
+        humanRef.current.position.z <= 200
+      ) {
+        setFloorColor('#ff7b00'); // 주황색
+      } else if (
+        humanRef.current.position.z > 200 &&
+        humanRef.current.position.z <= 345
+      ) {
+        setFloorColor('#ff0000'); // 빨간색
+      } else if (
+        humanRef.current.position.z >= 345 ||
+        humanRef.current.position.z <= 50
+      ) {
+        setFloorColor('#ffffff');
       }
 
       // 사람 움직임 로직
@@ -55,14 +76,14 @@ const Model3D = () => {
       //   } else if (humanRef.current.position.z >= 345){
       //     humanRef.current.rotation.y = Math.PI;
       //     setFinished(true);
-      //     setButtonPressed(false);        
+      //     setButtonPressed(false);
       //   }
       // }
       // 사람이 걷는 방향을 결정하기 위한 변수
-      let newX = humanRef.current.position.x;
+      // let newX = humanRef.current.position.x;
       let newRotationY = humanRef.current.rotation.y;
       const WALK_SPEED = 30;
-      
+
       // 특정 구간에서 x 값 변경 (좌우로 이동)
       if (isButtonPressed) {
         // console.log('human position :: ', humanRef.current.position);
@@ -71,16 +92,28 @@ const Model3D = () => {
           if (humanRef.current.position.z <= 100) {
             // setTargetX(-10); // 왼쪽으로 이동
             // newRotationY = Math.PI / 2; // 왼쪽 보기 (90도)
-          } else if (humanRef.current.position.z > 120 && humanRef.current.position.z <= 150) {
+          } else if (
+            humanRef.current.position.z > 120 &&
+            humanRef.current.position.z <= 150
+          ) {
             setTargetX(leftX); // 왼쪽으로 이동
             newRotationY = Math.PI / 2; // 왼쪽 보기 (90도)
-          } else if (humanRef.current.position.z > 150 && humanRef.current.position.z <= 200) {
+          } else if (
+            humanRef.current.position.z > 150 &&
+            humanRef.current.position.z <= 200
+          ) {
             setTargetX(centerX); // 정면으로 이동
             newRotationY = 0; // 정면 보기 (0도)
-          } else if (humanRef.current.position.z > 200 && humanRef.current.position.z <= 270) {
+          } else if (
+            humanRef.current.position.z > 200 &&
+            humanRef.current.position.z <= 270
+          ) {
             setTargetX(rightX); // 오른쪽으로 이동
             newRotationY = -Math.PI / 2; // 오른쪽 보기 (-90도)
-          } else if(humanRef.current.position.z > 270 && humanRef.current.position.z <= 345) {
+          } else if (
+            humanRef.current.position.z > 270 &&
+            humanRef.current.position.z <= 345
+          ) {
             setTargetX(leftX);
             newRotationY = Math.PI / 2;
           } else {
@@ -89,39 +122,38 @@ const Model3D = () => {
           }
 
           // X 이동이 목표에 도달했는지 확인
-          if(newRotationY === -Math.PI / 2 || newRotationY === Math.PI / 2) {
+          if (newRotationY === -Math.PI / 2 || newRotationY === Math.PI / 2) {
             setIsMovingX(true);
-            if(targetX <= 0) {
-              // 오른쪽 이동    
-              if(humanRef.current.position.x <= -50) {
+            if (targetX <= 0) {
+              // 오른쪽 이동
+              if (humanRef.current.position.x <= -50) {
                 console.log('오른쪽 끝에 닿았다');
                 newRotationY = 0; // 정면 보기 (0도)
                 setIsMovingX(false);
-              }    
+              }
             } else {
               // 왼쪽으로 이동
-              if(humanRef.current.position.x >= 50) {
+              if (humanRef.current.position.x >= 50) {
                 console.log('왼쪽 끝에 닿았다');
                 newRotationY = 0; // 정면 보기 (0도)
                 setIsMovingX(false);
-              }                  
+              }
             }
           }
-
 
           // 부드럽게 회전 (lerp 사용)
           humanRef.current.rotation.y = THREE.MathUtils.lerp(
             humanRef.current.rotation.y,
             newRotationY,
-            0.1 // 부드러운 회전 전환
+            0.1, // 부드러운 회전 전환
           );
 
           // X 이동이 끝나면 Z 방향 이동 시작
           if (!isMovingX) {
             humanRef.current.position.z += delta * WALK_SPEED;
             // humanRef.current.position.x = delta;
-          } else if(isMovingX) {
-            if(targetX < 0) {
+          } else if (isMovingX) {
+            if (targetX < 0) {
               humanRef.current.position.x -= delta * WALK_SPEED;
             } else {
               humanRef.current.position.x += delta * WALK_SPEED;
@@ -134,12 +166,12 @@ const Model3D = () => {
         }
       }
 
-      if(isReset) {
+      if (isReset) {
         humanRef.current.rotation.y = 0;
         humanRef.current.position.z = 0;
         humanRef.current.position.x = 0;
-        setFloorColor("#ffffff"); // 초기 색상
-      }   
+        setFloorColor('#ffffff'); // 초기 색상
+      }
     }
   });
 
@@ -157,17 +189,17 @@ const Model3D = () => {
   }, [actions, currentAnimation]);
 
   useEffect(() => {
-    if(isButtonPressed && !isFinished && !isReset) {
-      setCurrentAnimation("HumanArmature|Man_Walk");
+    if (isButtonPressed && !isFinished && !isReset) {
+      setCurrentAnimation('HumanArmature|Man_Walk');
     }
-    if(!isButtonPressed) {
-        setCurrentAnimation("HumanArmature|Man_Idle");
+    if (!isButtonPressed) {
+      setCurrentAnimation('HumanArmature|Man_Idle');
     }
     if (isFinished) {
-      setCurrentAnimation("HumanArmature|Man_Clapping");
+      setCurrentAnimation('HumanArmature|Man_Clapping');
     }
-    if(isReset) {
-      setCurrentAnimation("HumanArmature|Man_Idle");
+    if (isReset) {
+      setCurrentAnimation('HumanArmature|Man_Idle');
     }
   }, [isButtonPressed, isFinished, isReset]);
 

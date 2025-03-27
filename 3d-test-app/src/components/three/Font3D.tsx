@@ -1,17 +1,14 @@
-import * as THREE from 'three';
 import {
-  Billboard,
   Center,
-  CycleRaycast,
   Float,
   Helper,
-  ScreenSpace,
   Text3D,
   useCursor,
   useMatcapTexture,
 } from '@react-three/drei';
-import { ThreeEvent, useFrame, useThree } from '@react-three/fiber';
+import { ThreeEvent } from '@react-three/fiber';
 import { useRef, useState } from 'react';
+import * as THREE from 'three';
 
 interface Font3DProps {
   status: string;
@@ -32,9 +29,11 @@ const textureList: Record<string, string> = {
 
 const Font3D = (props: Font3DProps) => {
   const { status, delay, color, position } = props;
-  const [matcapTexture] = useMatcapTexture(color ? textureList[color] : 'CAE24E_6C9A23_A3C737_B3D43C');
+  const [matcapTexture] = useMatcapTexture(
+    color ? textureList[color] : 'CAE24E_6C9A23_A3C737_B3D43C',
+  );
 
-  const { width: w, height: h } = useThree((state) => state.viewport);
+  // const { width: w, height: h } = useThree((state) => state.viewport);
   const ref = useRef<THREE.Group>(null);
 
   const [hovered, set] = useState<boolean>(false);
@@ -53,12 +52,6 @@ const Font3D = (props: Font3DProps) => {
     bevelThickness: 0.2,
     // curveSegments: 24
   };
-
-  useFrame((_, delta) => {
-    if (ref.current) {
-      // ref.current.rotation.y += delta * 0.5;
-    }
-  });
 
   const onClick = (e: ThreeEvent<MouseEvent>) => {
     if (e && e.eventObject) {
@@ -85,9 +78,13 @@ const Font3D = (props: Font3DProps) => {
           floatIntensity={1} // Up/down float intensity, works like a multiplier with floatingRange,defaults to 1
           floatingRange={[0, 1]} // Range of y-axis values the object will float within, defaults to [-0.1,0.1]
         >
-          <Text3D position={[position[0], position[1], position[2]]} rotation={[0, 1, 0]} {...fontStyle}>
+          <Text3D
+            position={[position[0], position[1], position[2]]}
+            rotation={[0, 1, 0]}
+            {...fontStyle}
+          >
             {status}
-            <meshMatcapMaterial color='white' matcap={matcapTexture} />
+            <meshMatcapMaterial color="white" matcap={matcapTexture} />
           </Text3D>
           <Text3D
             // rotation={[0, Math.PI/2, 0]}
@@ -96,7 +93,7 @@ const Font3D = (props: Font3DProps) => {
             {...fontStyle}
           >
             {`${delay}분`}
-            <meshMatcapMaterial color='white' matcap={matcapTexture} />
+            <meshMatcapMaterial color="white" matcap={matcapTexture} />
           </Text3D>
         </Float>
       </Center>

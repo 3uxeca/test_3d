@@ -6,11 +6,11 @@ import * as THREE from 'three';
 type InfoButtonProps = {
   position: THREE.Vector3;
   waitingTime: number;
-}
+};
 
-const Info3D = (props:InfoButtonProps) => {
+const Info3D = (props: InfoButtonProps) => {
   const { position, waitingTime } = props;
-  const { scene, animations } = useGLTF("/models/InfoButton.glb");
+  const { scene } = useGLTF('/models/InfoButton.glb');
   const infoRef = useRef<THREE.Group>(null);
   console.log('InfoButton.glb scene :: ', scene);
   console.log('InfoButton.glb ref :: ', infoRef.current);
@@ -18,13 +18,12 @@ const Info3D = (props:InfoButtonProps) => {
   const clonedScene = scene.clone();
 
   useFrame((_, delta) => {
-    if(infoRef.current) {
+    if (infoRef.current) {
       infoRef.current.rotation.y += delta;
     }
-  });  
+  });
 
   useEffect(() => {
-    const color = '#ff0000'
     console.log('clonedScene :: ', clonedScene);
     clonedScene.traverse((chlid) => {
       // if (object.isMesh) {
@@ -35,18 +34,23 @@ const Info3D = (props:InfoButtonProps) => {
         console.log('child material :: ', chlid);
         // chlid.material = chlid.material.clone(); // 개별 인스턴스를 위한 material 복제
         // chlid.material.color.set(color); // 새로운 색상 적용
-      }      
+      }
     });
-  }, [clonedScene]); // color 변경 시 다시 적용  
+  }, [clonedScene]); // color 변경 시 다시 적용
 
   return (
     <>
-    <primitive ref={infoRef} object={clonedScene} scale={40} position={[position.x, position.y, position.z]} />
-    <Html position={[position.x+5, position.y+20, position.z]}>
-      <div className='w-[10vw] font-bold'>{waitingTime}분</div>
-    </Html>
+      <primitive
+        ref={infoRef}
+        object={clonedScene}
+        scale={40}
+        position={[position.x, position.y, position.z]}
+      />
+      <Html position={[position.x + 5, position.y + 20, position.z]}>
+        <div className="w-[10vw] font-bold">{waitingTime}분</div>
+      </Html>
     </>
-  )
-}
+  );
+};
 
 export default Info3D;

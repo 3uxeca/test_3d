@@ -11,9 +11,13 @@ const Barrier = (props: BarrierProps) => {
   const { position, rotation, color } = props;
   // const { scene: barrierScene } = useGLTF('/models/barrier/scene.gltf');
   // const { scene: barrierScene } = useGLTF('/models/velvet-rope/scene.gltf');
-  const { scene: redBarrierScene } = useGLTF('/models/pinch-barrier-red-narrow.gltf');
+  const { scene: redBarrierScene } = useGLTF(
+    '/models/pinch-barrier-red-narrow.gltf',
+  );
   const redBarrierClonedScene = redBarrierScene.clone();
-  const { scene: blueBarrierScene } = useGLTF('/models/pinch-barrier-blue-narrow.gltf');
+  const { scene: blueBarrierScene } = useGLTF(
+    '/models/pinch-barrier-blue-narrow.gltf',
+  );
   const blueBarrierClonedScene = blueBarrierScene.clone();
   return (
     <>

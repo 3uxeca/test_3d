@@ -1,9 +1,7 @@
 import AirportFootTraffic from '@/components/three/AirportFootTraffic';
 
 const PageAirportFootTraffic = () => {
-  return (
-    <AirportFootTraffic />
-  )
-}
+  return <AirportFootTraffic />;
+};
 
 export default PageAirportFootTraffic;

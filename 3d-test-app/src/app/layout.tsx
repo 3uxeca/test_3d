@@ -1,12 +1,14 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import { Inter } from 'next/font/google';
 
-const inter = Inter({ subsets: ["latin"] });
+import type { Metadata } from 'next';
+
+import './globals.css';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "3D Test APP",
-  description: "혼잡도 3D 테스트",
+  title: '3D Test APP',
+  description: '혼잡도 3D 테스트',
 };
 
 export default function RootLayout({
