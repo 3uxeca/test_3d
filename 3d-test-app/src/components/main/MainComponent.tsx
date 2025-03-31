@@ -16,7 +16,7 @@ const MainComponent = () => {
   ];
   return (
     <div className="h-full w-full p-8">
-      <PageTitle pageName="공항 혼잡도 분석" />
+      {/* <PageTitle pageName="공항 혼잡도 분석" />
       <div className="mt-8 flex w-full items-start justify-start gap-6">
         <div className="grid grid-rows-3 gap-5">
           {statusData?.map((item, index) => {
@@ -33,7 +33,8 @@ const MainComponent = () => {
         <div className="h-[70vh] w-[100%] bg-black">
           <Canvas3D />
         </div>
-      </div>
+      </div> */}
+      {/* <PageTitle title="실시간 대기열 현황" /> */}
     </div>
   );
 };

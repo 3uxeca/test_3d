@@ -1,15 +1,23 @@
-import { Inter } from 'next/font/google';
+import localFont from 'next/font/local';
 
 import type { Metadata } from 'next';
 
-import './globals.css';
+import Sidebar from '@/widgets/sidebar';
+import ReactQueryProvider from '@/shared/providers/ReactQueryProvider';
 
-const inter = Inter({ subsets: ['latin'] });
+import './globals.css';
 
 export const metadata: Metadata = {
   title: '3D Test APP',
   description: '혼잡도 3D 테스트',
 };
+
+const pretendard = localFont({
+  src: '../static/fonts/PretendardVariable.woff2',
+  display: 'swap',
+  weight: '45 920',
+  variable: '--font-pretendard',
+});
 
 export default function RootLayout({
   children,
@@ -18,7 +26,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={pretendard.className}>
+        <ReactQueryProvider>
+          <div className="aspect=[1920/1080] flex h-screen w-full">
+            <Sidebar />
+            {children}
+          </div>
+        </ReactQueryProvider>
+      </body>
     </html>
   );
 }

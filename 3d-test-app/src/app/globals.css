@@ -1,7 +1,35 @@
+/* Tailwind CSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* 브라우저 기본 스타일 초기화 */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* HTML과 Body의 기본 높이 및 기본 글꼴 설정 */
+html,
+body {
+  height: 100%;
+  font-family: sans-serif;
+}
+
+body {
+  /* color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb)); */
+}
+
+/* 커스텀 다크 모드 및 CSS 변수 */
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -16,13 +44,65 @@
   }
 }
 
-body {
-  height: 100vh;
-  background-color: #fdfdfd;
-}
-
+/* Tailwind Utilities 확장 */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+
+  /* 기본 텍스트 크기 및 정렬 */
+  .text-base {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  /* 마진과 패딩 유틸리티 확장 */
+  .margin-auto {
+    margin: auto;
+  }
+
+  .padding-base {
+    padding: 1rem;
+  }
+}
+
+/* 스크롤바 너비 설정 */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+}
+
+/* 스크롤바 버튼 (위/아래 화살표) 제거 */
+.custom-scrollbar::-webkit-scrollbar-button {
+  display: none !important;
+  height: 0 !important;
+  width: 0 !important;
+}
+
+/* 스크롤바 트랙 */
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+/* 스크롤바 손잡이 (thumb) */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  border-radius: 10px !important;
+  border: 2px solid transparent !important;
+  background-clip: padding-box !important;
+}
+
+/* 스크롤바 손잡이 호버 시 */
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Firefox용 스크롤바 설정 */
+.custom-scrollbar {
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(0, 0, 0, 0.3) transparent !important;
 }
