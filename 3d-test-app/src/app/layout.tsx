@@ -1,9 +1,9 @@
 import localFont from 'next/font/local';
 
-import type { Metadata } from 'next';
-
-import Sidebar from '@/widgets/sidebar';
 import ReactQueryProvider from '@/shared/providers/ReactQueryProvider';
+import Sidebar from '@/widgets/sidebar';
+
+import type { Metadata } from 'next';
 
 import './globals.css';
 

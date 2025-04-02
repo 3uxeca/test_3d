@@ -36,7 +36,7 @@ const ZoneTab = () => {
               <span
                 className={clsx(
                   'block h-4pxr rounded-lg bg-darkgray',
-                  'animate-underline-grow origin-center',
+                  'origin-center animate-underline-grow',
                 )}
                 style={{ width: '110px' }}
               />

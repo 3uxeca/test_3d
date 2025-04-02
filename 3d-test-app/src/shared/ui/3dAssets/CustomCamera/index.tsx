@@ -1,20 +1,25 @@
 import { PerspectiveCamera } from '@react-three/drei';
-import { Euler } from 'three';
+import { forwardRef, MutableRefObject, Ref } from 'react';
+import * as THREE from 'three';
 
-const CustomCamera = ({ cameraRef }: any) => {
-  return (
-    <>
+interface CustomCameraProps {
+  cameraRef: MutableRefObject<THREE.PerspectiveCamera | null>;
+}
+
+const CustomCamera = forwardRef(
+  (CustomCameraProps, ref: Ref<THREE.PerspectiveCamera>) => {
+    return (
       <PerspectiveCamera
         makeDefault
         position={[400, 280, 360]}
-        zoom={6} // 기본 줌 레벨
+        zoom={6}
         near={1}
         far={10000}
-        rotation={new Euler(-Math.PI / 2, -2, 0)}
-        ref={cameraRef}
+        rotation={new THREE.Euler(-Math.PI / 2, -2, 0)}
+        ref={ref}
       />
-    </>
-  );
-};
+    );
+  },
+);
 
 export default CustomCamera;

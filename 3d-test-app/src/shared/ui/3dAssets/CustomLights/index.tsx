@@ -2,7 +2,7 @@
 import { Environment } from '@react-three/drei';
 import { useRef } from 'react';
 
-const Lights = () => {
+const CustomLights = () => {
   const drectRef = useRef(null);
   return (
     <>
@@ -18,4 +18,4 @@ const Lights = () => {
   );
 };
 
-export default Lights;
+export default CustomLights;
